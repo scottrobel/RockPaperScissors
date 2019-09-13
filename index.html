@@ -1,0 +1,125 @@
+
+<html>
+<script>
+
+let caseComputerSelection;
+let casePlayerSelection;
+let playerWins = 0;
+let computerWins = 0;
+
+function game()
+{
+    let pSelection;
+    let cSelection;
+    let result;
+    let roundNumber = 1;
+    playerWins = 0;
+    computerWins = 0;
+    while(roundNumber <= 5) {
+        pSelection = prompt("Round: "+ roundNumber + " Enter Rock, Paper, or Scissors");
+        cSelection = computerPlay();
+        result = playRound(pSelection,cSelection);
+        console.log(result);
+        console.log("Your Score: " + playerWins);
+        console.log("Computers Score: " + computerWins);
+        roundNumber++;
+    }
+    
+
+    
+
+}
+function computerPlay ()
+    {
+        let randomInt = Math.floor(Math.random()*3)+1;
+        switch (randomInt)
+        {
+            case 1:
+            return "Rock";
+            break;
+            case 2:
+            return "Paper";
+            break;
+            case 3:
+            return "Scissors";
+            break;
+            
+        }
+    }
+    function playRound(playerSelection, computerSelection){
+       casePlayerSelection = playerSelection.toLowerCase();
+       caseComputerSelection = computerSelection.toLowerCase();
+        switch(casePlayerSelection)
+            {
+            case "rock":
+                switch(caseComputerSelection)
+                {
+                case "rock":
+                return tie();
+                break;
+                case "paper":
+                return loss();
+                break;
+                case "scissors":
+                return win();
+                break;
+                }
+
+            break;
+            case "paper":
+
+                switch(caseComputerSelection)
+                {
+                case "rock":
+                return win();
+                break;
+                case "paper":
+                return tie();
+                break;
+                case "scissors":
+                return loss();
+                break;
+                }
+
+            break;
+            case "scissors":
+                switch(caseComputerSelection)
+                {
+                case "rock":
+                return loss();
+                break;
+                case "paper":
+              
+                return win();
+                break;
+                case "scissors":
+                return tie();
+                break;
+                }
+            break;
+        }
+    }
+
+
+function capitalize(myString)
+{
+    return myString.slice(0,1).toUpperCase().concat(myString.slice(1));
+
+}
+function win()
+{
+    playerWins++;
+    return "You Win! " + capitalize(casePlayerSelection) + " Beats " + capitalize(caseComputerSelection);                
+}
+function loss()
+{
+    computerWins++;
+    return "You Loose! " + capitalize(casePlayerSelection) + " Looses to " + capitalize(caseComputerSelection);
+}
+function tie()
+{
+    return "You Tie! " + capitalize(casePlayerSelection) + " Ties with " + capitalize(caseComputerSelection);
+}
+</script>
+
+</html>
