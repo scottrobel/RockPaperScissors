@@ -1,33 +1,66 @@
 
 <html>
+<header>
+    <link rel = "stylesheet" type = "text/css" href = "./rps.css"> 
+</header>
+<div id = 'body'>
+<div id = myButtons>
+<button id = 'rock' >Rock</button>
+<button id = 'paper'>Paper</button>
+<button id = 'scissors'>Scissors</button>
+</div>
+<div id = 'lowerTxt'><div id = "upperTextFeild"></div></div>
+</div>
 <script>
 
 let caseComputerSelection;
 let casePlayerSelection;
 let playerWins = 0;
 let computerWins = 0;
+let ties = 0;
+let cSelection;
+const utxtFeild = document.querySelector('#upperTextFeild');
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+const lowerDiv = document.querySelector('#lowerTxt');
+const ltxtfeild = document.createElement('p');
+const pscore = document.createElement('p');
+const cscore = document.createElement('p');
+const tieCount = document.createElement('p');
+let roundNumber = 1;
 
+lowerDiv.appendChild(ltxtfeild);
+lowerDiv.appendChild(pscore);
+lowerDiv.appendChild(cscore);
+lowerDiv.appendChild(tieCount);
+let pSelection;
+rockButton.addEventListener('click',() => {
+pSelection = "rock";
+game()
+})
+paperButton.addEventListener('click',() => {
+pSelection = "paper";
+game()
+})
+scissorsButton.addEventListener('click',() => {
+pSelection = "scissors";
+game()
+})
 function game()
 {
-    let pSelection;
-    let cSelection;
+    
     let result;
-    let roundNumber = 1;
-    playerWins = 0;
-    computerWins = 0;
-    while(roundNumber <= 5) {
-        pSelection = prompt("Round: "+ roundNumber + " Enter Rock, Paper, or Scissors");
-        cSelection = computerPlay();
-        result = playRound(pSelection,cSelection);
-        console.log(result);
-        console.log("Your Score: " + playerWins);
-        console.log("Computers Score: " + computerWins);
-        roundNumber++;
-    }
+    utxtFeild.textContent = "Round "+ roundNumber + ": Cick Rock, Paper, or Scissors";
+    cSelection = computerPlay();
+    result = playRound(pSelection,cSelection);
+    ltxtfeild.textContent = ""+ result;
+    pscore.textContent = "Your Score: " + playerWins;
+    cscore.textContent = "Computers Score: " + computerWins;
+    tieCount.textContent = "ties: " + ties;
+    roundNumber++;
+    lowerDiv.appendChild(ltxtfeild);
     
-
-    
-
 }
 function computerPlay ()
     {
@@ -118,6 +151,7 @@ function loss()
 }
 function tie()
 {
+    ties++;
     return "You Tie! " + capitalize(casePlayerSelection) + " Ties with " + capitalize(caseComputerSelection);
 }
 </script>
